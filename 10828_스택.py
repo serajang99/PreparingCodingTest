@@ -1,13 +1,14 @@
 import sys
+input = sys.stdin.readline
 
 n = int(input())
-s = [] # stack
+s = []  # stack
 
 for i in range(n):
     # command(cmd)를 list로 받는다.
-    cmd = sys.stdin.readline().strip().split()
+    cmd = input().rstrip().split()
 
-    # push 연산 
+    # push 연산
     if cmd[0] == 'push':
         s.append(cmd[1])
 
@@ -35,4 +36,3 @@ for i in range(n):
             print(1)
         else:
             print(0)
-        

@@ -1,10 +1,13 @@
+import sys
+input = sys.stdin.readline
+
 # 반복 횟수 n
 n = int(input())
 
 for i in range(n):
-    ps = input() #parenthesis string
-    s = [] # stack
-    
+    ps = input()  # parenthesis string
+    s = []  # stack
+
     for p in ps:
         # '('일 경우 stack에 쌓는다.
         if p == '(':

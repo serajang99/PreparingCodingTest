@@ -1,8 +1,25 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10**9)
 
-preorder = []  # p l r
-postorder = []  # l r p
+
+def get_post(start, end):
+
+    if start > end:
+        return
+
+    mid = end + 1
+    for i in range(start+1, end+1):
+        if preorder[i] > preorder[start]:
+            mid = i
+            break
+
+    get_post(start+1, mid-1)
+    get_post(mid, end)
+    print(preorder[start])
+
+
+preorder = []
 
 while 1:
     try:
@@ -10,25 +27,4 @@ while 1:
     except:
         break
 
-n = len(preorder)
-position = [0]*(n+1)
-for i in range(n):
-    position[preorder[i]] = i
-
-
-def makepost(in_start, in_end, post_start, post_end):
-
-    if (in_start > in_end) or (post_start > post_end):
-        return
-
-    parents = postorder[post_end]
-    print(parents, end=" ")
-
-    left = position[parents] - in_start
-    right = in_end - position[parents]
-
-    makepost(in_start, in_start+left-1, post_start, post_start+left-1)
-    makepost(in_end-right+1, in_end, post_end-right, post_end-1)
-
-
-makepost(0, n-1, 0, n-1)
+get_post(0, len(preorder)-1)

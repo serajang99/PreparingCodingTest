@@ -1,4 +1,5 @@
 import sys
+from collections import defaultdict
 input = sys.stdin.readline
 
 lst = []
@@ -23,5 +24,22 @@ for i in range(k):
         j += 2
     j += 2
 
+
 for i in range(k):
-    print(test[i])
+    # print(test[i])
+    node = defaultdict(list)
+    for j in test[i]:
+        node[j[0]]
+        node[j[1]].extend([j[0]])
+
+    values = list(node.values())
+    for j in range(len(values)):
+        if len(values[j]) > 1:
+            print("Case %d is not a tree." % (i+1))
+            break
+    if len(values[j]) > 1:
+        break
+    else:
+        print("Case %d is a tree." % (i+1))
+
+    # print("node:", node)

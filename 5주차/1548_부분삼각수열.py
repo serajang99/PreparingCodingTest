@@ -19,3 +19,5 @@ else:
             if cnt == 1:
                 result = max(result, j-i+1)
     print(result)
+
+# https://isukorea.com/group/morgorithm/board/b/8

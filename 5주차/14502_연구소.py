@@ -43,29 +43,14 @@ def bfs(start_nodes, pMap):
 
 n, m = map(int, input().rstrip().split())
 pMap = []
-for i in range(m):
+for i in range(n):
     pMap.append(list(map(int, input().rstrip().split())))
-
-# for i in range(m):
-#     print(pMap[i])
 
 cnt = 0
 start_nodes = []
-for i in range(m):
-    for j in range(n):
+for i in range(n):
+    for j in range(m):
         if pMap[i][j] == 1:
             start_nodes.append((i, j))
-
-# start_nodes가 비어있는 경우
-if len(start_nodes) == 0:
-    for i in range(m):
-        if 0 in pMap[i]:
-            cnt = -1
-
-else:
-    bfs(start_nodes, pMap)
-
-# for i in range(m):
-#     print(pMap[i])
 
 print(cnt)

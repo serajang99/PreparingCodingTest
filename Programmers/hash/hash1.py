@@ -14,7 +14,6 @@ completion의 길이는 participant의 길이보다 1 작습니다.
 
 
 def solution(participant, completion):
-    answer = ''
     participant_dict = {}
     for p in participant:
         participant_dict[p] = 0
@@ -27,7 +26,5 @@ def solution(participant, completion):
 
     for key, value in participant_dict.items():
         if value != 0:
-            answer = key
-            break
-
-    return answer
+            return key
+    return ""

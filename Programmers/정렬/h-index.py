@@ -10,3 +10,19 @@ H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 
 과학자가 발표한 논문의 수는 1편 이상 1,000편 이하입니다.
 논문별 인용 횟수는 0회 이상 10,000회 이하입니다.
 '''
+
+
+def solution(citations):
+    answer = 0
+    citations = sorted(citations)
+    lenc = len(citations)
+    for i in range(lenc):
+        h = citations[i]
+        if lenc-i >= h and i <= h:
+            answer = h
+        else:
+            for j in range(answer+1, h):
+                if lenc-i >= j and i <= j:
+                    answer = j
+            break
+    return answer

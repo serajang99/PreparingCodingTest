@@ -1,3 +1,2 @@
 # PreparingCodingTest
-## python
-elice study 1
+## python3

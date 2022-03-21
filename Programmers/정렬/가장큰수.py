@@ -11,3 +11,13 @@ numbers의 길이는 1 이상 100,000 이하입니다.
 numbers의 원소는 0 이상 1,000 이하입니다.
 정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
 '''
+
+
+def solution(numbers):
+    answer = ''
+    numbers_str = []
+    for number in numbers:
+        numbers_str.append(str(number))
+    numbers_str = sorted(numbers_str, key=lambda x: x*3, reverse=True)
+    answer = str(int("".join(numbers_str)))
+    return answer

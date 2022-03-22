@@ -10,3 +10,40 @@ numbers는 길이 1 이상 7 이하인 문자열입니다.
 numbers는 0~9까지 숫자만으로 이루어져 있습니다.
 "013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.
 '''
+
+from itertools import permutations
+from math import sqrt, ceil
+
+
+def isPrime(x):
+    if x < 2:
+        return False
+    if x == 2:
+        return True
+
+    for i in range(2, ceil(sqrt(x))+1):
+        if x % i == 0:
+            return False
+    return True
+
+
+def solution(numbers):
+    answer = 0
+    numbers_comb = []
+    for i in range(1, len(numbers)+1):
+        numbers_comb.extend(permutations(numbers, i))
+
+    numbers_comb2 = list(map(list, numbers_comb))
+    numbers_comb3 = []
+    for numbers in numbers_comb2:
+        temp = ""
+        for n in numbers:
+            temp += n
+        numbers_comb3.append(int(temp))
+    numbers_comb3 = list(set(numbers_comb3))
+
+    for number in numbers_comb3:
+        if isPrime(number):
+            answer += 1
+
+    return answer

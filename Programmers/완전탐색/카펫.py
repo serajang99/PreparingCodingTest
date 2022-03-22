@@ -11,3 +11,25 @@ Leo가 본 카펫에서 갈색 격자의 수 brown, 노란색 격자의 수 yell
 노란색 격자의 수 yellow는 1 이상 2,000,000 이하인 자연수입니다.
 카펫의 가로 길이는 세로 길이와 같거나, 세로 길이보다 깁니다.
 '''
+from math import sqrt, ceil
+
+
+def getDivisor(yellow):
+    divisor = []
+    for i in range(1, ceil(sqrt(yellow))+1):
+        if yellow % i == 0:
+            divisor.append(i)
+    return divisor
+
+
+def solution(brown, yellow):
+    answer = []
+    divisor = getDivisor(yellow)
+
+    big = brown + yellow
+    for d in divisor:
+        if big % (d+2) == 0 and big % ((yellow//d)+2) == 0:
+            answer.append(big//(d+2))
+            answer.append((d+2))
+            break
+    return answer

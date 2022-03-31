@@ -8,8 +8,7 @@ def solution(jobs):
     n = len(jobs)
     jobs = deque(sorted(jobs, key=lambda x: x[0]))
     heap = []
-    while len(jobs) != 0 or len(heap) != 0:
-
+    while jobs or heap:
         while jobs and jobs[0][0] <= cur:
             heapq.heappush(heap, jobs.popleft()[::-1])
 

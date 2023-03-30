@@ -1,27 +1,50 @@
-with open("lineup.in", "r") as fin:
-    n = int(fin.readline())
-    constraints = [list(line.split()) for line in fin]
+from itertools import permutations
 
-print(constraints, n)
-new_constraints = []
-for constraint in constraints:
-    new_constraints.append([constraint[0], constraint[-1]])
+n = int(input())
+constraints = []
+cows_dict = {}
+for i in range(n):
+    li = input().rstrip().split()
+    constraints.append((li[0], li[-1]))
+    if li[0] not in cows_dict:
+        cows_dict[li[0]] = [li[-1]]
+    else:
+        cows_dict[li[0]].append(li[-1])
 
-print(new_constraints, n)
+    if li[-1] not in cows_dict:
+        cows_dict[li[-1]] = [li[0]]
+    else:
+        cows_dict[li[-1]].append(li[0])
 
 cows = ["Bessie", "Buttercup", "Belinda",
         "Beatrice", "Bella", "Blue", "Betsy", "Sue"]
 cows = sorted(cows)
 
-cows_dict = {}
-cnt = 0
-for cow in cows:
-    cows_dict[cow] = cnt
-    cnt += 1
+visited = {cow: False for cow in cows}
+for cow in permutations(cows, len(cows)):
+    flag = 0
+    for c in range(0, len(cow)):
+        if cow[c] in cows_dict:
+            if c == 0:
+                if cows_dict[cow[c]] == [cow[c+1]]:
+                    continue
+                else:
+                    flag = 1
+                    break
+            elif c == len(cow) - 1:
+                if cows_dict[cow[c]] == [cow[c-1]]:
+                    continue
+                else:
+                    flag = 1
+                    break
+            else:
+                if cows_dict[cow[c]] == [cow[c-1]] or cows_dict[cow[c]] == [cow[c+1]] or cows_dict[cow[c]] == [cow[c-1], cow[c+1]] or cows_dict[cow[c]] == [cow[c+1], cow[c-1]]:
+                    continue
+                else:
+                    flag = 1
+                    break
+    if flag == 0:
+        break
 
-print(cows_dict)
-
-
-result = 0
-with open("lineup.out", "w+") as fout:
-    print(result, file=fout)
+for c in cow:
+    print(c)

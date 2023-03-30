@@ -16,9 +16,28 @@ dungeons의 각 행은 각 던전의 ["최소 필요 피로도", "소모 피로�
 '''
 
 
-def solution(k, dungeons):
+from itertools import permutations
 
-    answer = -1
+
+def solution(k, dungeons):
+    answer = 0
+    for dungeonss in permutations(dungeons, len(dungeons)):
+        cur_k = k
+        cnt = 0
+        for dungeon in dungeonss:
+            needhp = dungeon[0]
+            usehp = dungeon[1]
+            if cur_k >= needhp:
+                cur_k -= usehp
+                cnt += 1
+            else:
+                break
+
+        if cnt > answer:
+            answer = cnt
+
+        if answer == len(dungeonss):
+            break
     return answer
 
 
